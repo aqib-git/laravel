@@ -42,4 +42,4 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         host: 178.128.48.244
         password: ${{ secrets.SSH_PASS }}
-        script: "/home/aqib/server_deploy.sh ${GITHUB_REF##*/}"
+        script: /home/aqib/server_deploy.sh ${GITHUB_REF##*/}

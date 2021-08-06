@@ -37,9 +37,12 @@ jobs:
       run: echo "branch is ${GITHUB_REF##*/}"
 
     - name: Deploy to production
+      env:
+        PUSHED_BRANCH_NAME: ${GITHUB_REF##*/}
       uses: appleboy/ssh-action@master
       with:
         username: ${{ secrets.SSH_USER }}
         host: 178.128.48.244
+        envs: PUSHED_BRANCH_NAME
         password: ${{ secrets.SSH_PASS }}
-        script: /home/aqib/server_deploy.sh aqib
+        script: /home/aqib/server_deploy.sh $PUSHED_BRANCH_NAME

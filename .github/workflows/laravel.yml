@@ -31,21 +31,10 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
       
-    # extract branch name
-    - name: Extract branch name
-      if: github.event_name != 'pull_request'
-      shell: bash
-      run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
-
-    # extract branch name on pull request
-    - name: Print branch name
-      if: github.event_name == 'pull_request'
-      run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
       
     # print branch name
     - name: Get branch name
-      run: echo "branch is $BRANCH_NAME"
+      run: echo "branch is ${GITHUB_REF##*/}"
 
     - name: Deploy to production
       uses: appleboy/ssh-action@master
@@ -53,4 +42,4 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         host: 178.128.48.244
         password: ${{ secrets.SSH_PASS }}
-        script: "/home/aqib/server_deploy.sh $BRANCH_NAME"
+        script: "/home/aqib/server_deploy.sh ${GITHUB_REF##*/}"

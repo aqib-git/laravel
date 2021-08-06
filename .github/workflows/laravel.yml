@@ -31,3 +31,10 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Deploy to production
+      uses: appleboy/ssh-action@master
+      with:
+        username: ${{ secrets.SSH_USER }}
+        host: 178.128.48.244
+        password: ${{ secrets.SSH_PASS }}
+        script: 'cd /var/www/html && ./server_deploy.sh ${{ github.head_ref }}'

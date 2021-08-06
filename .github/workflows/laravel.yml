@@ -34,11 +34,11 @@ jobs:
       
     # print branch name
     - name: Get branch name
-      run: echo "branch is ${GITHUB_REF##*/}"
+      run: echo "branch is ${{GITHUB_REF##*/}}"
 
     - name: Deploy to production
       env:
-        PUSHED_BRANCH_NAME: "${GITHUB_REF##*/}"
+        PUSHED_BRANCH_NAME: ${{GITHUB_REF##*/}}
       uses: appleboy/ssh-action@master
       with:
         username: ${{ secrets.SSH_USER }}

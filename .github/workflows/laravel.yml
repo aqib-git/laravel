@@ -37,4 +37,4 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         host: 178.128.48.244
         password: ${{ secrets.SSH_PASS }}
-        script: 'cd /var/www/html && ./server_deploy.sh ${{ github.head_ref }}'
+        script: './server_deploy.sh ${{ github.head_ref }}'

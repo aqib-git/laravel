@@ -34,7 +34,7 @@ jobs:
       
     # print branch name
     - name: Get branch name
-      run: echo "branch is ${{GITHUB_REF##*/}}"
+      run: echo "branch is ${GITHUB_REF##*/}"
 
     - name: Deploy to production
       env:

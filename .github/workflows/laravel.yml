@@ -2,7 +2,6 @@ name: Laravel
 
 on:
   push:
-  pull_request:
 
 jobs:
   laravel-tests:
@@ -31,6 +30,9 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    # print branch name
+    - name: Get branch name
+      run: echo ${GITHUB_REF##*/}
     - name: Deploy to production
       uses: appleboy/ssh-action@master
       with:

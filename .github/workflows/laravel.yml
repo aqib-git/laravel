@@ -41,7 +41,7 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
-      run:  mysql -h 127.0.0.1 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS db_test;'
+      run:  mysql -h 127.0.0.1 --port 33306 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS db_test;'
     - name: Run migrations
       run: php artisan migrate --force
    # - name: Create Database
